@@ -15,6 +15,7 @@ model Product {
   id          Int      @id @default(autoincrement())
   name        String
   price       Int
+  image       String?
   stock       Int
   description String?
   createdAt   DateTime @default(now())
@@ -28,6 +29,8 @@ model User {
   name      String
   email     String    @unique
   password  String
+  image     String?
+  role      String    @default("USER")
   cash      Int       @default(0)
   product   Product[]
   createdAt DateTime  @default(now())

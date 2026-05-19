@@ -5,14 +5,17 @@ import { error } from "node:console";
 
 export const createProduct = async (req: Request, res: Response, next: NextFunction) => {
     try {
-        const { name, price, description, stock, userId } = req.body;
+        const { name, price, description, stock } = req.body;
+        const userId = (req as any).user.id;
+        const image = req.file ? req.file.filename: null;
         const newProduct = await prisma.product.create({
             data: {
                 name: name,
                 price: Number(price),
                 stock: Number(stock),
                 description: description,
-                userId: userId
+                userId: userId,
+                image
             }
         });
 
